@@ -2,6 +2,20 @@
   "name": "vue-deprecate",
   "version": "0.1.0",
   "author": "fringers",
+  "bugs": {
+    "url": "https://github.com/fringers/vue-deprecate/issues"
+  },
+  "homepage": "https://github.com/fringers/vue-deprecate",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fringers/vue-deprecate.git"
+  },
+  "keywords": [
+    "deprecate",
+    "vue",
+    "vue.js"
+  ],
+  "license": "MIT",
   "main": "dist/vue-deprecate.umd.js",
   "scripts": {
     "build": "vue-cli-service build --target lib src/deprecate.js --mode production",
