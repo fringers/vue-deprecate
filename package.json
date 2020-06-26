@@ -5,10 +5,10 @@
   "bugs": {
     "url": "https://github.com/fringers/vue-deprecate/issues"
   },
-  "homepage": "https://github.com/fringers/vue-deprecate",
+  "homepage": "https://github.com/fringers/vue-deprecate#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fringers/vue-deprecate.git"
+    "url": "https://github.com/fringers/vue-deprecate.git"
   },
   "keywords": [
     "deprecate",
