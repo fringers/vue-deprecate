@@ -1,5 +1,11 @@
 # vue-deprecate
 
+## Installation
+
+```
+npm install vue-deprecate
+```
+
 ## Setup
 ```js
 import Vue from 'vue';
