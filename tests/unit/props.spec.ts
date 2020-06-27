@@ -4,7 +4,8 @@ import VueDeprecate from '@/deprecate';
 
 describe('Props', () => {
 
-  function mountWithPluginSpy(component, propsData) {
+  // TODO: fix types
+  function mountWithPluginSpy(component: any, propsData?: any) {
     const installSpy = jest.spyOn(VueDeprecate, 'install');
 
     const localVue = createLocalVue()
@@ -120,40 +121,43 @@ describe('Props', () => {
     });
 
     it('call console warn if used deprecated prop', () => {
-      console.warn = jest.fn();
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
       mountWithPluginSpy(componentWithObjectProps, {
         deprecatedProp: 'value'
       });
 
       expect(console.warn).toHaveBeenCalledTimes(1)
-      expect(console.warn.mock.calls[0][0]).toContain('[DEPRECATED]');
-      expect(console.warn.mock.calls[0][0]).toContain(componentWithObjectProps.name);
-      expect(console.warn.mock.calls[0][0]).toContain('deprecatedProp');
+      expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
+      expect(warnMock.mock.calls[0][0]).toContain(componentWithObjectProps.name);
+      expect(warnMock.mock.calls[0][0]).toContain('deprecatedProp');
     });
 
     it('call console warn if used deprecated prop with default value', () => {
-      console.warn = jest.fn();
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
       mountWithPluginSpy(componentWithObjectProps, {
         deprecatedPropWithDefaultVal: true,
       });
 
       expect(console.warn).toHaveBeenCalledTimes(1)
-      expect(console.warn.mock.calls[0][0]).toContain('[DEPRECATED]');
-      expect(console.warn.mock.calls[0][0]).toContain(componentWithObjectProps.name);
-      expect(console.warn.mock.calls[0][0]).toContain('deprecatedPropWithDefaultVal');
+      expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
+      expect(warnMock.mock.calls[0][0]).toContain(componentWithObjectProps.name);
+      expect(warnMock.mock.calls[0][0]).toContain('deprecatedPropWithDefaultVal');
     });
 
     it('call console warn with specific message if used deprecated prop with message', () => {
-      console.warn = jest.fn();
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
       mountWithPluginSpy(componentWithObjectProps, {
         deprecatedPropWithMsg: 6,
       });
 
-      expect(console.warn.mock.calls[0][0]).toContain('[DEPRECATED]');
-      expect(console.warn.mock.calls[0][0]).toContain(deprecatedMsg);
+      expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
+      expect(warnMock.mock.calls[0][0]).toContain(deprecatedMsg);
     });
   });
 

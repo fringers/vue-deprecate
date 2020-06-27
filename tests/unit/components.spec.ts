@@ -1,9 +1,10 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { shallowMount, createLocalVue, VueClass } from '@vue/test-utils';
 import VueDeprecate from '@/deprecate';
 
 describe('Components', () => {
 
-  function mountWithPluginSpy(component) {
+  // TODO: fix types
+  function mountWithPluginSpy(component: any) {
     const installSpy = jest.spyOn(VueDeprecate, 'install');
 
     const localVue = createLocalVue()
@@ -51,13 +52,14 @@ describe('Components', () => {
 
 
     it('call console warn if component is deprecated', () => {
-      console.warn = jest.fn();
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
       mountWithPluginSpy(deprecatedComponent);
 
       expect(console.warn).toHaveBeenCalledTimes(1)
-      expect(console.warn.mock.calls[0][0]).toContain('[DEPRECATED]');
-      expect(console.warn.mock.calls[0][0]).toContain(deprecatedComponent.name);
+      expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
+      expect(warnMock.mock.calls[0][0]).toContain(deprecatedComponent.name);
     });
   });
 
@@ -76,12 +78,13 @@ describe('Components', () => {
 
 
     it('call console warn with specific message', () => {
-      console.warn = jest.fn();
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
       mountWithPluginSpy(deprecatedWithMessageComponent);
 
-      expect(console.warn.mock.calls[0][0]).toContain('[DEPRECATED]');
-      expect(console.warn.mock.calls[0][0]).toContain(deprecatedMsg);
+      expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
+      expect(warnMock.mock.calls[0][0]).toContain(deprecatedMsg);
     });
   });
 });
