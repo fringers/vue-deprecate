@@ -8,6 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "main": "dist/vue-deprecate.umd.js",
+  "typings": "types/index.d.ts",
+  "files": [
+    "src",
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
   "dependencies": {
     "vue": "^2.6.11"
   },
