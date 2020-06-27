@@ -57,7 +57,7 @@ describe('Components', () => {
 
       mountWithPluginSpy(deprecatedComponent);
 
-      expect(console.warn).toHaveBeenCalledTimes(1)
+      expect(warnMock).toHaveBeenCalledTimes(1)
       expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
       expect(warnMock.mock.calls[0][0]).toContain(deprecatedComponent.name);
     });
