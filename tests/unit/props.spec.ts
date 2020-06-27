@@ -128,7 +128,7 @@ describe('Props', () => {
         deprecatedProp: 'value'
       });
 
-      expect(warnMock).toHaveBeenCalledTimes(1)
+      expect(warnMock).toHaveBeenCalledTimes(1);
       expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
       expect(warnMock.mock.calls[0][0]).toContain(componentWithObjectProps.name);
       expect(warnMock.mock.calls[0][0]).toContain('deprecatedProp');
@@ -142,7 +142,7 @@ describe('Props', () => {
         deprecatedPropWithDefaultVal: true,
       });
 
-      expect(warnMock).toHaveBeenCalledTimes(1)
+      expect(warnMock).toHaveBeenCalledTimes(1);
       expect(warnMock.mock.calls[0][0]).toContain('[DEPRECATED]');
       expect(warnMock.mock.calls[0][0]).toContain(componentWithObjectProps.name);
       expect(warnMock.mock.calls[0][0]).toContain('deprecatedPropWithDefaultVal');

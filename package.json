@@ -1,6 +1,6 @@
 {
   "name": "vue-deprecate",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "author": "fringers",
   "scripts": {
     "build": "vue-cli-service build --target lib src/deprecate.ts --mode production",
