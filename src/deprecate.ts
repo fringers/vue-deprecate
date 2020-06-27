@@ -3,7 +3,7 @@ import { checkComponent } from '@/components';
 import { checkProps } from '@/properties';
 
 interface VueDeprecateOptions {
-  enabledOnProduction: boolean;
+  enabledOnProduction?: boolean;
 }
 
 const defaultOptions: VueDeprecateOptions = {

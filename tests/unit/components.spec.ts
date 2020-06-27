@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue, VueClass } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import VueDeprecate from '@/deprecate';
 
 describe('Components', () => {
