@@ -1,4 +1,4 @@
-import Vue  from 'vue';
+import Vue, { PluginObject } from 'vue';
 
 function getOptions(component: Vue) {
   if (!component.$vnode) {
@@ -52,8 +52,12 @@ function printDeprecated (message: string) {
   console.warn(`[DEPRECATED] ${message}`);
 }
 
-const VueDeprecate = {
-  install: function (vue: typeof Vue, options?: any) {
+interface VueDeprecateOptions {
+
+}
+
+const VueDeprecate: PluginObject<VueDeprecateOptions> = {
+  install: function (vue: typeof Vue, options?: VueDeprecateOptions) {
     vue.mixin({
       created: function () {
         // TODO: fix typings
