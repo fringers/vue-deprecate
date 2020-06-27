@@ -43,7 +43,7 @@ function checkProps (component) {
 }
 
 
-function printDeprecated (message) {
+function printDeprecated (messag) {
   console.warn('[DEPRECATED] ' + message);
 }
 
