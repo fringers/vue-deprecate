@@ -29,99 +29,105 @@ describe('Options', () => {
     expect(installSpy).toHaveBeenCalled();
   }
 
-  const OLD_ENV = process.env;
+  describe('enabledOnProduction', () => {
+    const OLD_ENV = process.env;
 
-  beforeEach(() => {
-    jest.resetModules();
-    process.env = { ...OLD_ENV };
-    delete process.env.NODE_ENV;
-  });
-
-  afterEach(() => {
-    process.env = OLD_ENV;
-  });
-
-  it('log warnings if no options and not production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    mountWithPluginSpy(deprecatedComponent);
-
-    expect(warnMock).toHaveBeenCalledTimes(2);
-  });
-
-  it('log warnings if empty options and not production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    mountWithPluginSpy(deprecatedComponent, {});
-
-    expect(warnMock).toHaveBeenCalledTimes(2);
-  });
-
-  it('log warnings if enabledOnProduction=true and not production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    mountWithPluginSpy(deprecatedComponent, {
-      enabledOnProduction: true,
+    beforeEach(() => {
+      jest.resetModules();
+      process.env = { ...OLD_ENV };
+      delete process.env.NODE_ENV;
     });
 
-    expect(warnMock).toHaveBeenCalledTimes(2);
-  });
-
-  it('log warnings if enabledOnProduction=false and not production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    mountWithPluginSpy(deprecatedComponent, {
-      enabledOnProduction: false,
+    afterEach(() => {
+      process.env = OLD_ENV;
     });
 
-    expect(warnMock).toHaveBeenCalledTimes(2);
-  });
+    it('log warnings if no options and not production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
-  it('no warnings if no options and production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
+      mountWithPluginSpy(deprecatedComponent);
 
-    process.env.NODE_ENV = 'production';
-    mountWithPluginSpy(deprecatedComponent);
-
-    expect(warnMock).not.toHaveBeenCalled();
-  });
-
-  it('no warnings if empty options and production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    process.env.NODE_ENV = 'production';
-    mountWithPluginSpy(deprecatedComponent, {});
-
-    expect(warnMock).not.toHaveBeenCalled();
-  });
-
-  it('log warnings if enabledOnProduction=true and production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
-
-    process.env.NODE_ENV = 'production';
-    mountWithPluginSpy(deprecatedComponent, {
-      enabledOnProduction: true,
+      expect(warnMock).toHaveBeenCalledTimes(2);
     });
 
-    expect(warnMock).toHaveBeenCalledTimes(2);
-  });
+    it('log warnings if other options and not production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
 
-  it('no warnings if enabledOnProduction=false and production', () => {
-    const warnMock = jest.fn();
-    console.warn = warnMock;
+      mountWithPluginSpy(deprecatedComponent, {
+        someProp: 'value',
+      });
 
-    process.env.NODE_ENV = 'production';
-    mountWithPluginSpy(deprecatedComponent, {
-      enabledOnProduction: false,
+      expect(warnMock).toHaveBeenCalledTimes(2);
     });
 
-    expect(warnMock).not.toHaveBeenCalled();
+    it('log warnings if enabledOnProduction=true and not production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      mountWithPluginSpy(deprecatedComponent, {
+        enabledOnProduction: true,
+      });
+
+      expect(warnMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('log warnings if enabledOnProduction=false and not production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      mountWithPluginSpy(deprecatedComponent, {
+        enabledOnProduction: false,
+      });
+
+      expect(warnMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('no warnings if no options and production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      process.env.NODE_ENV = 'production';
+      mountWithPluginSpy(deprecatedComponent);
+
+      expect(warnMock).not.toHaveBeenCalled();
+    });
+
+    it('no warnings if other options and production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      process.env.NODE_ENV = 'production';
+      mountWithPluginSpy(deprecatedComponent, {
+        someProp: 'value',
+      });
+
+      expect(warnMock).not.toHaveBeenCalled();
+    });
+
+    it('log warnings if enabledOnProduction=true and production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      process.env.NODE_ENV = 'production';
+      mountWithPluginSpy(deprecatedComponent, {
+        enabledOnProduction: true,
+      });
+
+      expect(warnMock).toHaveBeenCalledTimes(2);
+    });
+
+    it('no warnings if enabledOnProduction=false and production', () => {
+      const warnMock = jest.fn();
+      console.warn = warnMock;
+
+      process.env.NODE_ENV = 'production';
+      mountWithPluginSpy(deprecatedComponent, {
+        enabledOnProduction: false,
+      });
+
+      expect(warnMock).not.toHaveBeenCalled();
+    });
   });
 });
