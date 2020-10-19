@@ -9,11 +9,31 @@ npm install vue-deprecate
 ```
 
 ## Setup
+
+### Default setup
+
 ```js
 import Vue from 'vue';
 import VueDeprecate from 'vue-deprecate';
 
 Vue.use(VueDeprecate);
+```
+
+
+### Nuxt.js setup
+
+Create file `plugins/vue-deprecate.js`:
+```js
+import Vue from 'vue'
+import VueDeprecate from 'vue-deprecate';
+
+Vue.use(VueDeprecate);
+```
+Then add the file path inside the `plugins` key of `nuxt.config.js`:
+```js
+export default {
+  plugins: ['@/plugins/vue-deprecate.js']
+}
 ```
 
 ## Usage
@@ -65,6 +85,19 @@ Deprecate property:
   template: '<div>this is component {{ count }}</div>'
 };
 ```
+
+### Usage with property decorators (like vue-property-decorator/nuxt-property-decorator)
+
+```js
+import { Vue, Component } from 'nuxt-property-decorator'
+
+@Component({
+  deprecated: true,
+})
+export default class Test extends Vue {
+}
+```
+
 
 ## Features
 

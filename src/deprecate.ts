@@ -14,7 +14,7 @@ const VueDeprecate: PluginObject<VueDeprecateOptions> = {
   install: function (vue: typeof Vue, options: VueDeprecateOptions = defaultOptions) {
     vue.mixin({
       created: function () {
-        if (process.env.NODE_ENV === 'production' && options && !options.enabledOnProduction) {
+        if (!vue.config.devtools && options && !options.enabledOnProduction) {
           return;
         }
 
