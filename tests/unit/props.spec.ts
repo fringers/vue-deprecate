@@ -10,6 +10,7 @@ describe('Props', () => {
 
     const localVue = createLocalVue()
     localVue.use(VueDeprecate);
+    localVue.config.devtools = true;
 
     shallowMount(component, {
       localVue,

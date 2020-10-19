@@ -13,11 +13,12 @@ describe('Options', () => {
   };
 
   // TODO: fix types
-  function mountWithPluginSpy(component: any, options?: any) {
+  function mountWithPluginSpy(component: any, options?: any, devtools: boolean = true) {
     const installSpy = jest.spyOn(VueDeprecate, 'install');
 
     const localVue = createLocalVue()
     localVue.use(VueDeprecate, options);
+    localVue.config.devtools = devtools;
 
     shallowMount(component, {
       localVue,
@@ -30,18 +31,6 @@ describe('Options', () => {
   }
 
   describe('enabledOnProduction', () => {
-    const OLD_ENV = process.env;
-
-    beforeEach(() => {
-      jest.resetModules();
-      process.env = { ...OLD_ENV };
-      delete process.env.NODE_ENV;
-    });
-
-    afterEach(() => {
-      process.env = OLD_ENV;
-    });
-
     it('log warnings if no options and not production', () => {
       const warnMock = jest.fn();
       console.warn = warnMock;
@@ -88,8 +77,7 @@ describe('Options', () => {
       const warnMock = jest.fn();
       console.warn = warnMock;
 
-      process.env.NODE_ENV = 'production';
-      mountWithPluginSpy(deprecatedComponent);
+      mountWithPluginSpy(deprecatedComponent, undefined, false);
 
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -98,10 +86,12 @@ describe('Options', () => {
       const warnMock = jest.fn();
       console.warn = warnMock;
 
-      process.env.NODE_ENV = 'production';
-      mountWithPluginSpy(deprecatedComponent, {
-        someProp: 'value',
-      });
+      mountWithPluginSpy(deprecatedComponent,
+          {
+            someProp: 'value',
+          },
+          false
+      );
 
       expect(warnMock).not.toHaveBeenCalled();
     });
@@ -110,10 +100,12 @@ describe('Options', () => {
       const warnMock = jest.fn();
       console.warn = warnMock;
 
-      process.env.NODE_ENV = 'production';
-      mountWithPluginSpy(deprecatedComponent, {
-        enabledOnProduction: true,
-      });
+      mountWithPluginSpy(deprecatedComponent,
+          {
+            enabledOnProduction: true,
+          },
+          false
+      );
 
       expect(warnMock).toHaveBeenCalledTimes(2);
     });
@@ -122,10 +114,12 @@ describe('Options', () => {
       const warnMock = jest.fn();
       console.warn = warnMock;
 
-      process.env.NODE_ENV = 'production';
-      mountWithPluginSpy(deprecatedComponent, {
-        enabledOnProduction: false,
-      });
+      mountWithPluginSpy(deprecatedComponent,
+          {
+            enabledOnProduction: false,
+          },
+          false
+      );
 
       expect(warnMock).not.toHaveBeenCalled();
     });
