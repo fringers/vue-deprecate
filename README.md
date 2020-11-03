@@ -108,3 +108,8 @@ You can:
 A warning with the name of component and/or property is displayed in the console when using deprecated components or properties. 
 
 
+## Links
+
+Article about this project (Polish only): https://fringers.pl/blog/20201103_vue-deprecate
+
+
